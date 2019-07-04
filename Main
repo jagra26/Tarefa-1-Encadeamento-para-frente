@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <stdio.h>
 
 int main()
@@ -14,15 +6,26 @@ int main()
     int quantidadeExp;
     scanf("%d", &quantidadeExp);
     int exps[quantidadeExp];
+    preencherExp(quantidadeExp, exps);
+    printf("Insira a quantidade de regras do sistema\n");
+    int quantidadeReg;
+    scanf("%d", &quantidadeReg);
+    int regs[3][quantidadeReg];
+    preencherReg(quantidadeReg, regs);
+    printf("Insira o id da expressão que se deseja saber o valor\n");
+    int id;
+    scanf("%d", &id);
+    engenho(quantidadeExp, exps, quantidadeReg, regs, id);
+    return 0;
+}
+void preencherExp(int quantidadeExp, int exps[]){
     for (int i = 0; i < quantidadeExp; i++) {
         printf("Expressão %d\n", i);
         printf("O valor é conhecido?\n 1 -> verdadeiro\n 0 -> desconhecido\n -1 -> falso\n");
         scanf("%d", &exps[i]);
     }
-    printf("Insira a quantidade de regras do sistema\n");
-    int quantidadeReg;
-    scanf("%d", &quantidadeReg);
-    int regs[3][quantidadeReg];
+}
+void preencherReg(int quantidadeReg, int regs[3][quantidadeReg]){
     for (int i = 0; i < quantidadeReg; i++) {
         printf("Regra %d\n", i);
         printf("Insira o id da expressão A\n");
@@ -31,11 +34,9 @@ int main()
         scanf("%d", &regs[1][i]);
         printf("Insira o id da resposta\n");
         scanf("%d", &regs[2][i]);
-        
     }
-    printf("Insira o id da expressão que se deseja saber o valor\n");
-    int id;
-    scanf("%d", &id);
+}
+void engenho(int quantidadeExp, int exps[], int quantidadeReg, int regs[3][quantidadeReg], int id){
     while(exps[id] == 0){
         for (int i = 0; i < quantidadeReg; i++) {
             if(exps[regs[0][i]] !=0 && exps[regs[1][i]] !=0
@@ -45,5 +46,4 @@ int main()
         }
     }
     printf("%d\n", exps[id]);
-    return 0;
 }
